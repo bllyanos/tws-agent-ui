@@ -11,8 +11,8 @@ interface Message {
 }
 
 interface FilterParams {
-  minBudget: number;
-  maxBudget: number;
+  minBudget: string | null;
+  maxBudget: string | null;
   primaryUseCase: string;
   earPhoto: File | null;
 }
@@ -32,8 +32,8 @@ export default function Home() {
   const [isClient, setIsClient] = useState(false);
 
   const [filterParams, setFilterParams] = useState<FilterParams>({
-    minBudget: 0, // 0 IDR default
-    maxBudget: 0, // 0 IDR default
+    minBudget: null, // Empty by default
+    maxBudget: null, // Empty by default
     primaryUseCase: "listening-music",
     earPhoto: null,
   });
@@ -95,13 +95,15 @@ export default function Home() {
     setInputMessage("");
   };
 
-  const formatCurrency = (amount: number) => {
-    if (amount >= 1000000) {
-      return `${(amount / 1000000).toFixed(1)}M IDR`;
-    } else if (amount >= 1000) {
-      return `${(amount / 1000).toFixed(0)}K IDR`;
+  const formatCurrency = (amount: string | null) => {
+    if (!amount) return "Not set";
+    const numAmount = parseFloat(amount) || 0;
+    if (numAmount >= 1000000) {
+      return `${(numAmount / 1000000).toFixed(1)}M IDR`;
+    } else if (numAmount >= 1000) {
+      return `${(numAmount / 1000).toFixed(0)}K IDR`;
     }
-    return `${amount.toLocaleString("id-ID")} IDR`;
+    return `${numAmount.toLocaleString("id-ID")} IDR`;
   };
 
   useEffect(() => {

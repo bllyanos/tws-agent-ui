@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import BudgetInput from "./BudgetInput";
 
 interface FilterParams {
-  minBudget: number;
-  maxBudget: number;
+  minBudget: string | null;
+  maxBudget: string | null;
   primaryUseCase: string;
   earPhoto: File | null;
 }
@@ -23,7 +23,7 @@ export default function Sidebar({
 
   const updateFilterParam = (
     key: keyof FilterParams,
-    value: number | string | File | null
+    value: string | null | File | null
   ) => {
     const updatedParams = {
       ...filterParams,
@@ -51,13 +51,15 @@ export default function Sidebar({
     updateFilterParam("earPhoto", file);
   };
 
-  const formatCurrency = (amount: number) => {
-    if (amount >= 1000000) {
-      return `${(amount / 1000000).toFixed(1)}M IDR`;
-    } else if (amount >= 1000) {
-      return `${(amount / 1000).toFixed(0)}K IDR`;
+  const formatCurrency = (amount: string | null) => {
+    if (!amount) return "Not set";
+    const numAmount = parseFloat(amount) || 0;
+    if (numAmount >= 1000000) {
+      return `${(numAmount / 1000000).toFixed(1)}M IDR`;
+    } else if (numAmount >= 1000) {
+      return `${(numAmount / 1000).toFixed(0)}K IDR`;
     }
-    return `${amount.toLocaleString("id-ID")} IDR`;
+    return `${numAmount.toLocaleString("id-ID")} IDR`;
   };
 
   const handleReset = () => {
@@ -67,8 +69,8 @@ export default function Sidebar({
     }
     setImagePreview(null);
     onFilterParamsChange({
-      minBudget: 0,
-      maxBudget: 0,
+      minBudget: null,
+      maxBudget: null,
       primaryUseCase: "listening-music",
       earPhoto: null,
     });
