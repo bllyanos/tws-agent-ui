@@ -21,7 +21,8 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hello! I'm your AI assistant. How can I help you today?",
+      content:
+        "Hello! I'm ALMA (Ask LLaMA Model Audio), your AI audio assistant. How can I help you today?",
       role: "assistant",
       timestamp: new Date(),
     },
@@ -87,7 +88,8 @@ export default function Home() {
     setMessages([
       {
         id: "1",
-        content: "Hello! I'm your AI assistant. How can I help you today?",
+        content:
+          "Hello! I'm ALMA (Ask LLaMA Model Audio), your AI audio assistant. How can I help you today?",
         role: "assistant",
         timestamp: new Date(),
       },
@@ -156,7 +158,7 @@ export default function Home() {
               </svg>
               New Chat
             </button>
-            <h1 className="text-xl font-bold ml-4">Audio Assistant</h1>
+            <h1 className="text-xl font-bold ml-4">ALMA</h1>
           </div>
           <div className="navbar-end">
             <div className="badge badge-primary">
@@ -181,7 +183,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="chat-header">
-                {message.role === "user" ? "You" : "Assistant"}
+                {message.role === "user" ? "You" : "ALMA"}
                 {isClient && (
                   <time className="text-xs opacity-50">
                     {message.timestamp.toLocaleTimeString()}
