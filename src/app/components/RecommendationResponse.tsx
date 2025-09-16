@@ -75,19 +75,21 @@ export default function RecommendationResponse({
         </div>
       )}
 
-      {/* Ear Analysis with Annotated Image */}
+      {/* Visual Ear Analysis Display */}
       <div className="card bg-base-100 shadow-sm">
         <div className="card-body p-4">
-          <h4 className="card-title text-sm mb-4">Ear Analysis</h4>
+          <h4 className="card-title text-sm mb-4">
+            👂 Visual Ear Analysis & Measurements
+          </h4>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Left Column - Annotated Image */}
+            {/* Left Column - Annotated Image (150px width) */}
             <div className="space-y-2">
-              <h5 className="font-medium text-sm">Annotated Ear Photo</h5>
-              <div className="relative">
+              <div className="relative w-[150px] mx-auto">
                 {ear_analysis.annotated_image &&
+                ear_analysis.annotated_image.length > 100 &&
                 ear_analysis.annotated_image !== "base64 code" ? (
                   <img
-                    src={`data:image/jpeg;base64,${ear_analysis.annotated_image}`}
+                    src={ear_analysis.annotated_image}
                     alt="Annotated ear analysis"
                     className="w-full h-auto rounded-lg border border-base-300"
                   />
@@ -102,60 +104,54 @@ export default function RecommendationResponse({
               </div>
             </div>
 
-            {/* Right Column - Analysis Summary */}
+            {/* Right Column - How to Read Analysis Legend */}
             <div className="space-y-2">
-              <h5 className="font-medium text-sm">Analysis Summary</h5>
-              <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div>
-                    <span className="font-medium">Canal Diameter:</span>{" "}
-                    {ear_analysis.measurements.ear_canal_diameter_mm}mm
+              <h5 className="font-medium text-sm">How to Read Analysis</h5>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded bg-purple-500"></div>
+                  <span>🟣 Head Bounding Box</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded bg-yellow-500"></div>
+                  <span>🟡 Ear Bounding Box</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded bg-blue-500"></div>
+                  <span>🔵 Headphone Line</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded bg-green-500"></div>
+                  <span>🟢 Earbud Line</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded bg-green-400"></div>
+                  <span>🟢 Measurement Lines</span>
+                </div>
+              </div>
+
+              {/* Measurements Summary */}
+              <div className="pt-4 border-t border-base-300">
+                <div className="grid grid-cols-1 gap-2 text-xs">
+                  <div className="flex justify-between">
+                    <span>👂 Ear Canal:</span>
+                    <span className="font-medium">
+                      {ear_analysis.measurements.ear_canal_diameter_mm}mm
+                    </span>
                   </div>
-                  <div>
-                    <span className="font-medium">Size Category:</span>{" "}
-                    {ear_analysis.measurements.size_category}
+                  <div className="flex justify-between">
+                    <span>📏 Concha:</span>
+                    <span className="font-medium">
+                      {ear_analysis.measurements.concha_width_mm}mm
+                    </span>
                   </div>
-                  <div>
-                    <span className="font-medium">Concha Width:</span>{" "}
-                    {ear_analysis.measurements.concha_width_mm}mm
-                  </div>
-                  <div>
-                    <span className="font-medium">Concha Depth:</span>{" "}
-                    {ear_analysis.measurements.concha_depth_mm}mm
-                  </div>
-                  <div>
-                    <span className="font-medium">Ear Height:</span>{" "}
-                    {ear_analysis.measurements.overall_ear_height_mm}mm
-                  </div>
-                  <div>
-                    <span className="font-medium">Ear Width:</span>{" "}
-                    {ear_analysis.measurements.overall_ear_width_mm}mm
+                  <div className="flex justify-between">
+                    <span>📊 Size:</span>
+                    <span className="font-medium">
+                      {ear_analysis.measurements.size_category}
+                    </span>
                   </div>
                 </div>
-
-                <div className="pt-2 border-t border-base-300">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="font-medium">Detection Confidence:</span>
-                    <div className="badge badge-sm badge-success">
-                      {ear_analysis.measurements.confidence}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between text-xs mt-1">
-                    <span className="font-medium">Analysis Quality:</span>
-                    <div className="badge badge-sm badge-info">
-                      {ear_analysis.analysis_confidence}
-                    </div>
-                  </div>
-                </div>
-
-                {ear_analysis.measurements.notes && (
-                  <div className="pt-2 border-t border-base-300">
-                    <p className="text-xs text-base-content/60">
-                      <span className="font-medium">Notes:</span>{" "}
-                      {ear_analysis.measurements.notes}
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -263,6 +259,211 @@ export default function RecommendationResponse({
           </div>
         ))}
       </div>
+
+      {/* Ear-Specific Fit Analysis */}
+      {ear_analysis.recommendations &&
+        ear_analysis.recommendations.length > 0 && (
+          <div className="space-y-2">
+            <h4 className="text-lg font-bold">🎯 Ear-Specific Fit Analysis</h4>
+            {ear_analysis.recommendations.map((fitRec, index) => (
+              <div
+                key={fitRec.tws_id || `fit-rec-${index}`}
+                className="collapse collapse-arrow bg-base-100 shadow-sm"
+              >
+                <input type="checkbox" defaultChecked={index === 0} />
+                <div className="collapse-title text-lg font-medium">
+                  <div className="flex items-center justify-between">
+                    <span>
+                      #{index + 1} {fitRec.brand || "Unknown"}{" "}
+                      {fitRec.model || "Model"}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-primary">
+                        {formatCurrency(fitRec.price || 0)}
+                      </span>
+                      <div
+                        className={`badge ${getTierColor(
+                          fitRec.tier_rating || "A"
+                        )}`}
+                      >
+                        {fitRec.tier_rating || "A"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="collapse-content">
+                  <div className="space-y-4 pt-2">
+                    {/* Fit Score and Reason */}
+                    <div>
+                      <h5 className="font-medium text-sm mb-2">
+                        Why Recommended
+                      </h5>
+                      <p className="text-sm text-base-content/80">
+                        {fitRec.fit_reason || "No reason provided"}
+                      </p>
+                    </div>
+
+                    {/* Key Features */}
+                    <div>
+                      <h5 className="font-medium text-sm mb-2">Key Features</h5>
+                      <div className="flex flex-wrap gap-1">
+                        <span className="badge badge-outline badge-sm">
+                          Fit Score: {fitRec.fit_score || 0}/100
+                        </span>
+                        <span className="badge badge-outline badge-sm">
+                          Type: {fitRec.type || "N/A"}
+                        </span>
+                        <span className="badge badge-outline badge-sm">
+                          Size: {fitRec.physical_dimensions?.fit_size || "N/A"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Pros and Cons */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="font-medium text-sm mb-2 text-success">
+                          Pros
+                        </h5>
+                        <ul className="text-sm space-y-1">
+                          <li className="flex items-start gap-2">
+                            <span className="text-success">✓</span>
+                            <span>Perfect fit for your ear measurements</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-success">✓</span>
+                            <span>
+                              High fit score: {fitRec.fit_score || 0}/100
+                            </span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-success">✓</span>
+                            <span>Optimized for your ear canal size</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="font-medium text-sm mb-2 text-error">
+                          Considerations
+                        </h5>
+                        <ul className="text-sm space-y-1">
+                          <li className="flex items-start gap-2">
+                            <span className="text-error">•</span>
+                            <span>Based on ear measurements only</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <span className="text-error">•</span>
+                            <span>May need to test comfort in person</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Physical Specifications */}
+                    <div>
+                      <h5 className="font-medium text-sm mb-2">
+                        Physical Specifications
+                      </h5>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div>
+                          <div className="space-y-1">
+                            {fitRec.physical_dimensions?.earbud ? (
+                              <>
+                                <div>
+                                  <span className="font-medium">
+                                    Earbud Size:
+                                  </span>{" "}
+                                  {fitRec.physical_dimensions.earbud
+                                    .length_mm || "N/A"}
+                                  mm ×{" "}
+                                  {fitRec.physical_dimensions.earbud.width_mm ||
+                                    "N/A"}
+                                  mm
+                                </div>
+                                <div>
+                                  <span className="font-medium">Weight:</span>{" "}
+                                  {fitRec.physical_dimensions.earbud
+                                    .weight_grams || "N/A"}
+                                  g
+                                </div>
+                                <div>
+                                  <span className="font-medium">Has Stem:</span>{" "}
+                                  {fitRec.physical_dimensions.earbud.has_stem
+                                    ? "Yes"
+                                    : "No"}
+                                </div>
+                              </>
+                            ) : fitRec.physical_dimensions?.headphone ? (
+                              <>
+                                <div>
+                                  <span className="font-medium">
+                                    Headphone Size:
+                                  </span>{" "}
+                                  {fitRec.physical_dimensions.headphone
+                                    .length_mm || "N/A"}
+                                  mm ×{" "}
+                                  {fitRec.physical_dimensions.headphone
+                                    .width_mm || "N/A"}
+                                  mm
+                                </div>
+                                <div>
+                                  <span className="font-medium">Weight:</span>{" "}
+                                  {fitRec.physical_dimensions.headphone
+                                    .weight_grams || "N/A"}
+                                  g
+                                </div>
+                                <div>
+                                  <span className="font-medium">Depth:</span>{" "}
+                                  {fitRec.physical_dimensions.headphone
+                                    .depth_mm || "N/A"}
+                                  mm
+                                </div>
+                              </>
+                            ) : (
+                              <div>No physical dimensions available</div>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <div className="space-y-1">
+                            <div>
+                              <span className="font-medium">Canal Range:</span>{" "}
+                              {fitRec.physical_dimensions
+                                ?.ear_canal_diameter_range?.min_mm || "N/A"}
+                              mm -{" "}
+                              {fitRec.physical_dimensions
+                                ?.ear_canal_diameter_range?.max_mm || "N/A"}
+                              mm
+                            </div>
+                            <div>
+                              <span className="font-medium">Fit Size:</span>{" "}
+                              {fitRec.physical_dimensions?.fit_size || "N/A"}
+                            </div>
+                            <div>
+                              <span className="font-medium">Type:</span>{" "}
+                              {fitRec.type || "N/A"}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Purchase Links */}
+                    <div>
+                      <h5 className="font-medium text-sm mb-2">Where to Buy</h5>
+                      <div className="flex flex-wrap gap-2">
+                        <span className="text-sm text-base-content/60">
+                          Purchase links not available for fit-specific
+                          recommendations
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
       {/* Reasoning */}
       <div className="card bg-base-100 shadow-sm">

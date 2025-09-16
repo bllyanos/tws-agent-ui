@@ -65,13 +65,20 @@ export interface EarAnalysis {
     fit_score: number;
     fit_reason: string;
     physical_dimensions: {
-      earbud: {
+      earbud?: {
         length_mm: number;
         width_mm: number;
         weight_grams: number;
         has_stem: boolean;
       };
-      case: {
+      headphone?: {
+        length_mm: number;
+        width_mm: number;
+        depth_mm: number;
+        weight_grams: number;
+        rotation_degrees: number;
+      };
+      case?: {
         length_mm: number;
         width_mm: number;
         height_mm: number;
