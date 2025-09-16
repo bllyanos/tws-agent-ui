@@ -64,7 +64,7 @@
             }
         }
     ],
-    "reasoning": "The recommendations are based on the high-end budget and professional audio use case. The image suggests a user in a quiet, possibly office environment, which aligns with the use of high-quality earbuds for professional purposes.\n\n🎯 VISUAL EAR ANALYSIS:\nBased on your ear photo, I measured your ear canal diameter as 9.0mm. The annotated image shows exactly how the recommended TWS will fit your ear.",
+    "reasoning": "The recommendations are based on the high-end budget and professional audio use case. The image suggests a user in a quiet, possibly office environment, which aligns with the use of high-quality earbuds for professional purposes.\n\nVISUAL EAR ANALYSIS:\nBased on your ear photo, I measured your ear canal diameter as 9.0mm. The annotated image shows exactly how the recommended TWS will fit your ear.",
     "confidence_score": 0.9,
     "sources": [
         "Web search results"

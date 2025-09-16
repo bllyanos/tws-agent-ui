@@ -102,7 +102,7 @@ export interface RecommendationResponse {
   reasoning: string;
   confidence_score: number;
   sources: string[];
-  ear_analysis: EarAnalysis;
+  ear_analysis?: EarAnalysis;
   has_visual_proof: boolean;
 }
 

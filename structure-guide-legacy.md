@@ -5,7 +5,7 @@
 ### 1. Page Layout Structure
 ```
 ┌─────────────────────────────────────┐
-│ 🎧 Header: Audio Headphones RAG Agent │
+│ Header: Audio Headphones RAG Agent │
 ├─────────────────────────────────────┤
 │ Sidebar (25%) │ Main Chat (75%)     │
 │ • Budget      │ • Chat Messages     │
@@ -39,16 +39,16 @@
 ### 4. Visual Ear Analysis Display
 ```
 ┌─────────────────────────────────────┐
-│ 👂 Visual Ear Analysis & Measurements │
+│ Visual Ear Analysis & Measurements │
 ├─────────────────────────────────────┤
 │ [Image] │ How to Read Analysis      │
-│ 150px   │ • 🟣 Head Bounding Box    │
-│         │ • 🟡 Ear Bounding Box     │
-│         │ • 🔵 Headphone Line       │
-│         │ • 🟢 Earbud Line          │
-│         │ • 🟢 Measurement Lines    │
+│ 150px   │ • Purple Head Bounding Box│
+│         │ • Yellow Ear Bounding Box │
+│         │ • Blue Headphone Line     │
+│         │ • Green Earbud Line       │
+│         │ • Green Measurement Lines │
 ├─────────────────────────────────────┤
-│ 👂 Ear Canal: 7.2mm │ 📏 Concha: 15.3mm │ 📊 Size: Medium │
+│ Ear Canal: 7.2mm │ Concha: 15.3mm │ Size: Medium │
 └─────────────────────────────────────┘
 ```
 
@@ -74,7 +74,7 @@
 ### 6. Ear-Specific Fit Analysis (Additional Recommendations)
 ```
 ┌─────────────────────────────────────┐
-│ 🎯 Ear-Specific Fit Analysis        │
+│ Ear-Specific Fit Analysis        │
 ├─────────────────────────────────────┤
 │ #1 Sony WF-1000XM5 - Fit Score: 95/100 │
 │ • Fit Reason: Perfect ear canal match │
@@ -118,12 +118,12 @@ description = rec.get('description') or rec.get('why_recommended') or rec.get('r
 
 ### 9. Loading States
 Progressive status messages (8 seconds each):
-1. "🤔 Analyzing your request..."
-2. "🔍 Searching knowledge base..."
-3. "📊 Evaluating specifications..."
-4. "⚖️ Comparing earbuds..."
-5. "🎯 Analyzing ear fit..." (if image)
-6. "✨ Composing recommendations..."
+1. "Analyzing your request..."
+2. "Searching knowledge base..."
+3. "Evaluating specifications..."
+4. "Comparing earbuds..."
+5. "Analyzing ear fit..." (if image)
+6. "Composing recommendations..."
 
 ### 10. Error Handling
 - **API Down**: Red status + retry button

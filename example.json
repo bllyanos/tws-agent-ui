@@ -82,7 +82,7 @@
         }
       }
     ],
-    "reasoning": "Based on the image, the user has average-sized ears. The Sony LinkBuds Fit is recommended first due to its exceptional comfort and fitting. The Sennheiser Momentum True Wireless 4 is recommended for its authentic Sennheiser sound and improved battery life. The Bose QuietComfort Earbuds are recommended for their excellent sound quality and outstanding ANC performance.\n\n🎯 VISUAL EAR ANALYSIS:\nBased on your ear photo, I measured your ear canal diameter as 7.2mm. The annotated image shows exactly how the recommended TWS will fit your ear.",
+    "reasoning": "Based on the image, the user has average-sized ears. The Sony LinkBuds Fit is recommended first due to its exceptional comfort and fitting. The Sennheiser Momentum True Wireless 4 is recommended for its authentic Sennheiser sound and improved battery life. The Bose QuietComfort Earbuds are recommended for their excellent sound quality and outstanding ANC performance.\n\nVISUAL EAR ANALYSIS:\nBased on your ear photo, I measured your ear canal diameter as 7.2mm. The annotated image shows exactly how the recommended TWS will fit your ear.",
     "confidence_score": 0.85,
     "sources": [
       "Sennheiser Momentum True Wireless 4 specifications data",

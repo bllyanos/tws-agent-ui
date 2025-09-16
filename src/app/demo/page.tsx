@@ -137,7 +137,7 @@ export default function DemoPage() {
           },
         ],
         reasoning:
-          "Based on your budget of 3 million IDR and preference for music listening with noise cancellation, I've selected these three excellent options. The Sony LinkBuds Fit offers the best value within your budget with exceptional comfort and the same driver technology as the premium XM5. The Sennheiser Momentum True Wireless 4 provides authentic audiophile sound quality, while the Bose QuietComfort Earbuds excel in noise cancellation performance.\n\n🎯 AUDIO ANALYSIS:\nAll recommendations are optimized for music listening with excellent sound quality, comfort for extended use, and effective noise cancellation features.",
+          "Based on your budget of 3 million IDR and preference for music listening with noise cancellation, I've selected these three excellent options. The Sony LinkBuds Fit offers the best value within your budget with exceptional comfort and the same driver technology as the premium XM5. The Sennheiser Momentum True Wireless 4 provides authentic audiophile sound quality, while the Bose QuietComfort Earbuds excel in noise cancellation performance.\n\nAUDIO ANALYSIS:\nAll recommendations are optimized for music listening with excellent sound quality, comfort for extended use, and effective noise cancellation features.",
         confidence_score: 0.92,
         sources: [
           "Sennheiser Momentum True Wireless 4 specifications data",
@@ -146,93 +146,7 @@ export default function DemoPage() {
           "Audio quality comparison studies",
           "Noise cancellation performance tests",
         ],
-        ear_analysis: {
-          measurements: {
-            ear_canal_diameter_mm: 7.2,
-            concha_width_mm: 14.5,
-            concha_depth_mm: 9.8,
-            overall_ear_height_mm: 63.0,
-            overall_ear_width_mm: 36.0,
-            size_category: "Medium",
-            coordinates: {
-              ear_bounding_box: {
-                top_left: [436, 786],
-                bottom_right: [531, 951],
-                center: [483, 869],
-              },
-              head_bounding_box: {
-                top_left: [273, 596],
-                bottom_right: [709, 1134],
-                center: [491, 865],
-              },
-              ear_canal_center: [493, 869],
-              concha_boundary: [
-                [479, 858],
-                [507, 858],
-                [507, 880],
-                [479, 880],
-              ],
-              measurement_lines: [
-                {
-                  from: [478, 869],
-                  to: [508, 869],
-                  label: "canal_diameter",
-                  description: "Ear canal opening width",
-                },
-                {
-                  from: [479, 859],
-                  to: [507, 859],
-                  label: "concha_width",
-                  description: "Concha bowl width",
-                },
-                {
-                  from: [517, 786],
-                  to: [517, 951],
-                  label: "ear_height",
-                  description: "Overall ear height",
-                },
-              ],
-              key_landmarks: {
-                ear_lobe: [455, 951],
-                ear_top: [464, 786],
-                tragus: [502, 885],
-              },
-            },
-            confidence: "high",
-            notes: "Ear detected with 0.07 confidence",
-          },
-          recommendations: [
-            {
-              tws_id: "sony_linkbuds_fit",
-              brand: "Sony",
-              model: "LinkBuds Fit",
-              type: "earbud",
-              fit_score: 95.0,
-              fit_reason:
-                "Your ear canal diameter (7.2mm) fits perfectly within this Medium TWS range (6.0-8.0mm)",
-              physical_dimensions: {
-                earbud: {
-                  length_mm: 30.5,
-                  width_mm: 17.3,
-                  weight_grams: 6.0,
-                  has_stem: false,
-                },
-                case: {
-                  length_mm: 66.3,
-                  width_mm: 59.4,
-                  height_mm: 26.7,
-                  weight_grams: 60.0,
-                },
-                fit_size: "Medium",
-                ear_canal_diameter_range: { min_mm: 6.0, max_mm: 8.0 },
-              },
-              price: 2799000.0,
-              tier_rating: "S",
-            },
-          ],
-          annotated_image: "base64 code",
-          analysis_confidence: "high",
-        },
+        // ear_analysis: undefined, // This will show the placeholder
         has_visual_proof: false,
       },
     },

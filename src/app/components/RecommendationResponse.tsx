@@ -1,6 +1,13 @@
 "use client";
 
 import { RecommendationResponse as RecommendationResponseType } from "../../lib/api";
+import {
+  EyeIcon,
+  ChartBarIcon,
+  TagIcon,
+  CheckIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 
 interface RecommendationResponseProps extends RecommendationResponseType {}
 
@@ -76,87 +83,126 @@ export default function RecommendationResponse({
       )}
 
       {/* Visual Ear Analysis Display */}
-      <div className="card bg-base-100 shadow-sm">
-        <div className="card-body p-4">
-          <h4 className="card-title text-sm mb-4">
-            👂 Visual Ear Analysis & Measurements
-          </h4>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Left Column - Annotated Image (150px width) */}
-            <div className="space-y-2">
-              <div className="relative w-[150px] mx-auto">
-                {ear_analysis.annotated_image &&
-                ear_analysis.annotated_image.length > 100 &&
-                ear_analysis.annotated_image !== "base64 code" ? (
-                  <img
-                    src={ear_analysis.annotated_image}
-                    alt="Annotated ear analysis"
-                    className="w-full h-auto rounded-lg border border-base-300"
-                  />
-                ) : (
-                  // Placeholder image when base64 data is not available
-                  <img
-                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMCIgZmlsbD0iI0U1RTdFQiIvPgo8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxMjAiIHI9IjQwIiBmaWxsPSIjRDFENUQ5Ii8+CjxjaXJjbGUgY3g9IjE4MCIgY3k9IjEwMCIgcj0iMTUiIGZpbGw9IiNEMUQ1RDkiLz4KPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTAwIiByPSIxNSIgZmlsbD0iI0QxRDVENyIvPgo8cGF0aCBkPSJNMTgwIDE0MEMyMDAgMTYwIDIwMCAxNjAgMjAwIDE2MEMyMDAgMTYwIDIwMCAxNjAgMjIwIDE0MCIgc3Ryb2tlPSIjRDFENUQ5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8dGV4dCB4PSIyMDAiIHk9IjI0MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNkI3MjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FYXIgQW5hbHlzaXMgUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjYwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIHdpbGwgYXBwZWFyIGhlcmU8L3RleHQ+Cjwvc3ZnPgo="
-                    alt="Ear analysis placeholder"
-                    className="w-full h-auto rounded-lg border border-base-300"
-                  />
-                )}
-              </div>
-            </div>
-
-            {/* Right Column - How to Read Analysis Legend */}
-            <div className="space-y-2">
-              <h5 className="font-medium text-sm">How to Read Analysis</h5>
-              <div className="space-y-2 text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-purple-500"></div>
-                  <span>🟣 Head Bounding Box</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-yellow-500"></div>
-                  <span>🟡 Ear Bounding Box</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-blue-500"></div>
-                  <span>🔵 Headphone Line</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-green-500"></div>
-                  <span>🟢 Earbud Line</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded bg-green-400"></div>
-                  <span>🟢 Measurement Lines</span>
+      {ear_analysis ? (
+        <div className="card bg-base-100 shadow-sm">
+          <div className="card-body p-4">
+            <h4 className="card-title text-sm mb-4 flex items-center gap-2">
+              <EyeIcon className="w-5 h-5" />
+              Visual Ear Analysis & Measurements
+            </h4>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left Column - Annotated Image (150px width) */}
+              <div className="space-y-2">
+                <div className="relative w-[150px] mx-auto">
+                  {ear_analysis.annotated_image &&
+                  ear_analysis.annotated_image.length > 100 &&
+                  ear_analysis.annotated_image !== "base64 code" ? (
+                    <img
+                      src={ear_analysis.annotated_image}
+                      alt="Annotated ear analysis"
+                      className="w-full h-auto rounded-lg border border-base-300"
+                    />
+                  ) : (
+                    // Placeholder image when base64 data is not available
+                    <img
+                      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMCIgZmlsbD0iI0U1RTdFQiIvPgo8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxMjAiIHI9IjQwIiBmaWxsPSIjRDFENUQ5Ii8+CjxjaXJjbGUgY3g9IjE4MCIgY3k9IjEwMCIgcj0iMTUiIGZpbGw9IiNEMUQ1RDkiLz4KPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTAwIiByPSIxNSIgZmlsbD0iI0QxRDVENyIvPgo8cGF0aCBkPSJNMTgwIDE0MEMyMDAgMTYwIDIwMCAxNjAgMjAwIDE2MEMyMDAgMTYwIDIwMCAxNjAgMjIwIDE0MCIgc3Ryb2tlPSIjRDFENUQ5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8dGV4dCB4PSIyMDAiIHk9IjI0MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNkI3MjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FYXIgQW5hbHlzaXMgUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjYwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIHdpbGwgYXBwZWFyIGhlcmU8L3RleHQ+Cjwvc3ZnPgo="
+                      alt="Ear analysis placeholder"
+                      className="w-full h-auto rounded-lg border border-base-300"
+                    />
+                  )}
                 </div>
               </div>
 
-              {/* Measurements Summary */}
-              <div className="pt-4 border-t border-base-300">
-                <div className="grid grid-cols-1 gap-2 text-xs">
-                  <div className="flex justify-between">
-                    <span>👂 Ear Canal:</span>
-                    <span className="font-medium">
-                      {ear_analysis.measurements.ear_canal_diameter_mm}mm
-                    </span>
+              {/* Right Column - How to Read Analysis Legend */}
+              <div className="space-y-2">
+                <h5 className="font-medium text-sm">How to Read Analysis</h5>
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded bg-purple-500"></div>
+                    <span>Head Bounding Box</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>📏 Concha:</span>
-                    <span className="font-medium">
-                      {ear_analysis.measurements.concha_width_mm}mm
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded bg-yellow-500"></div>
+                    <span>Ear Bounding Box</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>📊 Size:</span>
-                    <span className="font-medium">
-                      {ear_analysis.measurements.size_category}
-                    </span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded bg-blue-500"></div>
+                    <span>Headphone Line</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded bg-green-500"></div>
+                    <span>Earbud Line</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded bg-green-400"></div>
+                    <span>Measurement Lines</span>
+                  </div>
+                </div>
+
+                {/* Measurements Summary */}
+                <div className="pt-4 border-t border-base-300">
+                  <div className="grid grid-cols-1 gap-2 text-xs">
+                    <div className="flex justify-between">
+                      <span className="flex items-center gap-1">
+                        <EyeIcon className="w-3 h-3" />
+                        Ear Canal:
+                      </span>
+                      <span className="font-medium">
+                        {ear_analysis.measurements.ear_canal_diameter_mm}mm
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="flex items-center gap-1">
+                        <ChartBarIcon className="w-3 h-3" />
+                        Concha:
+                      </span>
+                      <span className="font-medium">
+                        {ear_analysis.measurements.concha_width_mm}mm
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="flex items-center gap-1">
+                        <ChartBarIcon className="w-3 h-3" />
+                        Size:
+                      </span>
+                      <span className="font-medium">
+                        {ear_analysis.measurements.size_category}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        // Placeholder when ear analysis is not available
+        <div className="card bg-base-100 shadow-sm">
+          <div className="card-body p-4">
+            <h4 className="card-title text-sm mb-4 flex items-center gap-2">
+              <EyeIcon className="w-5 h-5" />
+              Visual Ear Analysis & Measurements
+            </h4>
+            <div className="flex flex-col items-center justify-center py-8 text-center">
+              <div className="w-32 h-32 mx-auto mb-4">
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiBmaWxsPSIjRjNGNEY2Ii8+CjxyZWN0IHg9IjE2IiB5PSIxNiIgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iOCIkZmlsbD0iI0U1RTdFQiIvPgo8Y2lyY2xlIGN4PSI2NCIgY3k9IjQ4IiByPSIzMiIgZmlsbD0iI0QxRDVENyIvPgo8Y2lyY2xlIGN4PSI1NiIgY3k9IjQwIiByPSIxMiIgZmlsbD0iI0QxRDVENyIvPgo8Y2lyY2xlIGN4PSI3MiIgY3k9IjQwIiByPSIxMiIgZmlsbD0iI0QxRDVENyIvPgo8cGF0aCBkPSJNNTYgNTZDNjQgNjQgNjQgNjQgNjQgNjRDNjQgNjQgNjQgNjQgNzIgNTYiIHN0cm9rZT0iI0QxRDVENyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHRleHQgeD0iNjQiIHk9Ijk2IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM2QjcyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkVhciBBbmFseXNpczwvdGV4dD4KPHRleHQgeD0iNjQiIHk9IjEwOCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjgiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5vdCBhdmFpbGFibGU8L3RleHQ+Cjwvc3ZnPgo="
+                  alt="Ear analysis not available"
+                  className="w-full h-full opacity-50"
+                />
+              </div>
+              <h5 className="font-medium text-base mb-2">
+                Ear Analysis Not Available
+              </h5>
+              <p className="text-sm text-base-content/70 max-w-md">
+                Visual ear analysis requires an ear image to be uploaded. Upload
+                a clear photo of your ear to get personalized fit
+                recommendations and measurements.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Recommendations Collapsible */}
       <div className="space-y-2">
@@ -214,7 +260,7 @@ export default function RecommendationResponse({
                     <ul className="text-sm space-y-1">
                       {rec.pros.map((pro, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-success">✓</span>
+                          <CheckIcon className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
                           <span>{pro}</span>
                         </li>
                       ))}
@@ -227,7 +273,7 @@ export default function RecommendationResponse({
                     <ul className="text-sm space-y-1">
                       {rec.cons.map((con, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-error">✗</span>
+                          <XMarkIcon className="w-4 h-4 text-error mt-0.5 flex-shrink-0" />
                           <span>{con}</span>
                         </li>
                       ))}
@@ -261,10 +307,13 @@ export default function RecommendationResponse({
       </div>
 
       {/* Ear-Specific Fit Analysis */}
-      {ear_analysis.recommendations &&
+      {ear_analysis?.recommendations &&
         ear_analysis.recommendations.length > 0 && (
           <div className="space-y-2">
-            <h4 className="text-lg font-bold">🎯 Ear-Specific Fit Analysis</h4>
+            <h4 className="text-lg font-bold flex items-center gap-2">
+              <TagIcon className="w-5 h-5" />
+              Ear-Specific Fit Analysis
+            </h4>
             {ear_analysis.recommendations.map((fitRec, index) => (
               <div
                 key={fitRec.tws_id || `fit-rec-${index}`}
@@ -327,17 +376,17 @@ export default function RecommendationResponse({
                         </h5>
                         <ul className="text-sm space-y-1">
                           <li className="flex items-start gap-2">
-                            <span className="text-success">✓</span>
+                            <CheckIcon className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
                             <span>Perfect fit for your ear measurements</span>
                           </li>
                           <li className="flex items-start gap-2">
-                            <span className="text-success">✓</span>
+                            <CheckIcon className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
                             <span>
                               High fit score: {fitRec.fit_score || 0}/100
                             </span>
                           </li>
                           <li className="flex items-start gap-2">
-                            <span className="text-success">✓</span>
+                            <CheckIcon className="w-4 h-4 text-success mt-0.5 flex-shrink-0" />
                             <span>Optimized for your ear canal size</span>
                           </li>
                         </ul>
