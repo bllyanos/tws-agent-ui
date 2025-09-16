@@ -167,43 +167,101 @@ export default function RecommendationResponse({
         </div>
       )}
 
-      {/* Ear Analysis Summary */}
+      {/* Ear Analysis with Annotated Image */}
       <div className="card bg-base-100 shadow-sm">
         <div className="card-body p-4">
-          <h4 className="card-title text-sm">Ear Analysis Summary</h4>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <div>
-              <span className="font-medium">Canal Diameter:</span>{" "}
-              {ear_analysis.measurements.ear_canal_diameter_mm}mm
+          <h4 className="card-title text-sm mb-4">Ear Analysis</h4>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Left Column - Annotated Image */}
+            <div className="space-y-2">
+              <h5 className="font-medium text-sm">Annotated Ear Photo</h5>
+              <div className="relative">
+                {ear_analysis.annotated_image &&
+                ear_analysis.annotated_image !== "base64 code" ? (
+                  <img
+                    src={`data:image/jpeg;base64,${ear_analysis.annotated_image}`}
+                    alt="Annotated ear analysis"
+                    className="w-full h-auto rounded-lg border border-base-300"
+                  />
+                ) : (
+                  // Placeholder image when base64 data is not available
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxyZWN0IHg9IjUwIiB5PSI1MCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMCIgZmlsbD0iI0U1RTdFQiIvPgo8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxMjAiIHI9IjQwIiBmaWxsPSIjRDFENUQ5Ii8+CjxjaXJjbGUgY3g9IjE4MCIgY3k9IjEwMCIgcj0iMTUiIGZpbGw9IiNEMUQ1RDkiLz4KPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTAwIiByPSIxNSIgZmlsbD0iI0QxRDVENyIvPgo8cGF0aCBkPSJNMTgwIDE0MEMyMDAgMTYwIDIwMCAxNjAgMjAwIDE2MEMyMDAgMTYwIDIwMCAxNjAgMjIwIDE0MCIgc3Ryb2tlPSIjRDFENUQ5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8dGV4dCB4PSIyMDAiIHk9IjI0MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNkI3MjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5FYXIgQW5hbHlzaXMgUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjIwMCIgeT0iMjYwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5Q0EzQUYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlIHdpbGwgYXBwZWFyIGhlcmU8L3RleHQ+Cjwvc3ZnPgo="
+                    alt="Ear analysis placeholder"
+                    className="w-full h-auto rounded-lg border border-base-300"
+                  />
+                )}
+              </div>
             </div>
-            <div>
-              <span className="font-medium">Size Category:</span>{" "}
-              {ear_analysis.measurements.size_category}
-            </div>
-            <div>
-              <span className="font-medium">Confidence:</span>{" "}
-              {ear_analysis.measurements.confidence}
-            </div>
-            <div>
-              <span className="font-medium">Analysis:</span>{" "}
-              {ear_analysis.analysis_confidence}
+
+            {/* Right Column - Analysis Summary */}
+            <div className="space-y-2">
+              <h5 className="font-medium text-sm">Analysis Summary</h5>
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="font-medium">Canal Diameter:</span>{" "}
+                    {ear_analysis.measurements.ear_canal_diameter_mm}mm
+                  </div>
+                  <div>
+                    <span className="font-medium">Size Category:</span>{" "}
+                    {ear_analysis.measurements.size_category}
+                  </div>
+                  <div>
+                    <span className="font-medium">Concha Width:</span>{" "}
+                    {ear_analysis.measurements.concha_width_mm}mm
+                  </div>
+                  <div>
+                    <span className="font-medium">Concha Depth:</span>{" "}
+                    {ear_analysis.measurements.concha_depth_mm}mm
+                  </div>
+                  <div>
+                    <span className="font-medium">Ear Height:</span>{" "}
+                    {ear_analysis.measurements.overall_ear_height_mm}mm
+                  </div>
+                  <div>
+                    <span className="font-medium">Ear Width:</span>{" "}
+                    {ear_analysis.measurements.overall_ear_width_mm}mm
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-base-300">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-medium">Detection Confidence:</span>
+                    <div className="badge badge-sm badge-success">
+                      {ear_analysis.measurements.confidence}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-xs mt-1">
+                    <span className="font-medium">Analysis Quality:</span>
+                    <div className="badge badge-sm badge-info">
+                      {ear_analysis.analysis_confidence}
+                    </div>
+                  </div>
+                </div>
+
+                {ear_analysis.measurements.notes && (
+                  <div className="pt-2 border-t border-base-300">
+                    <p className="text-xs text-base-content/60">
+                      <span className="font-medium">Notes:</span>{" "}
+                      {ear_analysis.measurements.notes}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Recommendations Accordion */}
+      {/* Recommendations Collapsible */}
       <div className="space-y-2">
         {recommendations.map((rec, index) => (
           <div
             key={rec.rank}
             className="collapse collapse-arrow bg-base-100 shadow-sm"
           >
-            <input
-              type="radio"
-              name="recommendations-accordion"
-              defaultChecked={index === 0}
-            />
+            <input type="checkbox" defaultChecked={index === 0} />
             <div className="collapse-title text-lg font-medium">
               <div className="flex items-center justify-between">
                 <span>
