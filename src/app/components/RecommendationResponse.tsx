@@ -1,100 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { RecommendationResponse as RecommendationResponseType } from "../../lib/api";
 
-interface Recommendation {
-  rank: number;
-  brand: string;
-  model: string;
-  price: number;
-  key_features: string[];
-  why_recommended: string;
-  pros: string[];
-  cons: string[];
-  purchase_links: {
-    Tokopedia?: string;
-    Shopee?: string;
-    "Tiktok Shop"?: string;
-  };
-}
-
-interface EarAnalysis {
-  measurements: {
-    ear_canal_diameter_mm: number;
-    concha_width_mm: number;
-    concha_depth_mm: number;
-    overall_ear_height_mm: number;
-    overall_ear_width_mm: number;
-    size_category: string;
-    coordinates: {
-      ear_bounding_box: {
-        top_left: number[];
-        bottom_right: number[];
-        center: number[];
-      };
-      head_bounding_box: {
-        top_left: number[];
-        bottom_right: number[];
-        center: number[];
-      };
-      ear_canal_center: number[];
-      concha_boundary: number[][];
-      measurement_lines: Array<{
-        from: number[];
-        to: number[];
-        label: string;
-        description: string;
-      }>;
-      key_landmarks: {
-        ear_lobe: number[];
-        ear_top: number[];
-        tragus: number[];
-      };
-    };
-    confidence: string;
-    notes: string;
-  };
-  recommendations: Array<{
-    tws_id: string;
-    brand: string;
-    model: string;
-    type: string;
-    fit_score: number;
-    fit_reason: string;
-    physical_dimensions: {
-      earbud: {
-        length_mm: number;
-        width_mm: number;
-        weight_grams: number;
-        has_stem: boolean;
-      };
-      case: {
-        length_mm: number;
-        width_mm: number;
-        height_mm: number;
-        weight_grams: number;
-      };
-      fit_size: string;
-      ear_canal_diameter_range: {
-        min_mm: number;
-        max_mm: number;
-      };
-    };
-    price: number;
-    tier_rating: string;
-  }>;
-  annotated_image: string;
-  analysis_confidence: string;
-}
-
-interface RecommendationResponseProps {
-  recommendations: Recommendation[];
-  reasoning: string;
-  confidence_score: number;
-  sources: string[];
-  ear_analysis: EarAnalysis;
-  has_visual_proof: boolean;
-}
+interface RecommendationResponseProps extends RecommendationResponseType {}
 
 export default function RecommendationResponse({
   recommendations,
@@ -271,7 +179,11 @@ export default function RecommendationResponse({
                   <span className="text-sm font-bold text-primary">
                     {formatCurrency(rec.price)}
                   </span>
-                  <div className={`badge ${getTierColor("S")}`}>S</div>
+                  <div
+                    className={`badge ${getTierColor(rec.tier_rating || "A")}`}
+                  >
+                    {rec.tier_rating || "A"}
+                  </div>
                 </div>
               </div>
             </div>

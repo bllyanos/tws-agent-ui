@@ -34,6 +34,7 @@ const exampleData = {
         "Tiktok Shop":
           "https://shop-id.tokopedia.com/view/product/1730811847233275332",
       },
+      tier_rating: "S",
     },
     {
       rank: 2,
@@ -64,6 +65,7 @@ const exampleData = {
           "https://shopee.co.id/SENNHEISER-Momentum-True-Wireless-4-Earbuds-i.450998050.23089975997",
         "Tiktok Shop": "https://vt.tokopedia.com/t/ZSHtWRa9rbNPr-JP0Ku/",
       },
+      tier_rating: "SS",
     },
     {
       rank: 3,
@@ -94,6 +96,7 @@ const exampleData = {
         "Tiktok Shop":
           "https://shop-id.tokopedia.com/view/product/1730244454765528456",
       },
+      tier_rating: "S",
     },
   ],
   reasoning:
